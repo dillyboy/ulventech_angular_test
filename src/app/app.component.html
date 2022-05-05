@@ -1,0 +1,49 @@
+<div class="heading">
+  <img width="40" src="./assets/logo.jpeg" alt="logo">
+  <h1>Angular Practical Test</h1>
+</div>
+
+<div class="layout-container">
+  <div class="first-part">
+    <p><b>1</b>. Wrap the textarea (and/or input) + submit inside an Angular Reactive Form. Show some usage of reactive features of said form (maybe a letter counter outside the box or any sort of validation).</p>
+    <form (ngSubmit)="onSubmit(formGroup)" [formGroup]="formGroup">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" maxlength="256">
+        <mat-error *ngIf="formGroup.controls['email'].invalid">{{getErrorMessage()}}</mat-error>
+        <mat-hint align="end">{{ formGroup.controls['email'].value?.length}} / 256</mat-hint>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+
+    </form>
+  </div>
+  <div class="second-part">
+    <p><b>2</b>. Create a second input which expects a URL (we'll fake it by using this url https://random-data-api.com/api/restaurant/random_restaurant)
+      and then counts the words within the "text_out" property of the response using Angular's Http service. Do not use make the stream into a promise.
+      You should use this input to display the top 10 most used words in the body of text along with the count of word occurrences. This should <b>NOT</b> be done using
+      a “Functions module” but by creating an Injectable to handle the business logic. Then use dependency injection in the components accordingly. Implement the
+      above injectable in a way that it can hold the results in an array within the Injectable (not just return the results). Assuming that there could possibly be
+      more than once instances of the counting component, propose a way to share the Injectable using DI without conflicting between the components.</p>
+    <form>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter Url</mat-label>
+        <input required type="email" matInput [formControl]="urlFormControl">
+      </mat-form-field>
+      <div></div>
+      <button [disabled]="disableApiRequestButton" mat-raised-button color="primary" type="button" (click)="getSummary()">Get Summary</button>
+      <div *ngIf="disableApiRequestButton" class="progress"><mat-spinner diameter="25"></mat-spinner></div>
+    </form>
+
+    <mat-card *ngFor="let list of topTenList; let index = index">
+      <h2>Request {{index + 1}}</h2>
+      <b><i>Top 10 words with most occurrences</i></b>
+      <ul>
+        <li *ngFor="let words of list"><b>{{words.key}}</b> : {{words.value}}</li>
+      </ul>
+    </mat-card>
+
+  </div>
+
+</div>
+

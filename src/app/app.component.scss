@@ -1,0 +1,53 @@
+.heading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+  width: 100%;
+
+  img {
+    margin-right: 20px;
+  }
+
+  h1 {
+    margin: 0;
+    display: inline-block
+  }
+
+}
+
+.layout-container {
+  padding-top: 20px;
+
+
+  .first-part {
+    margin: 20px;
+    flex: 1;
+    button {
+      margin-top: 10px;
+    }
+  }
+
+  .second-part {
+    margin: 20px;
+    flex: 1;
+    mat-card {
+      display: inline-block;
+      margin: 10px 10px 10px 0;
+
+      ul {
+        list-style: decimal
+      }
+    }
+  }
+}
+
+.progress {
+  display: inline-block;
+  margin-left: 20px;
+
+  mat-spinner {
+    position: relative;
+    top: 6px;
+  }
+}
